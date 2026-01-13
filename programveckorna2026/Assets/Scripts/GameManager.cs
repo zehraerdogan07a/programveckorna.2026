@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public int lives = 3;
+    public int lives = 5;
     public LifeUI lifeUI;
+
+    private bool gameOver;
 
     void Awake()
     {
@@ -21,24 +23,26 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        lives = 5;
+        gameOver = false;
         lifeUI.UpdateHearts(lives);
     }
 
     public void LoseLife()
     {
+        if (gameOver) return;
+
         lives--;
-
-        if (lives < 0)
-            lives = 0;
-
         lifeUI.UpdateHearts(lives);
 
-        if (lives == 0)
+        if (lives <= 0)
         {
+            gameOver = true;
             Debug.Log("GAME OVER");
         }
     }
 
+    // TEST ONLY
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -47,4 +51,3 @@ public class GameManager : MonoBehaviour
         }
     }
 }
-
