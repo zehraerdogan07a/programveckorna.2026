@@ -3,14 +3,18 @@ using UnityEngine.UI;
 
 public class LifeUI : MonoBehaviour
 {
-    public Image heart1;
-    public Image heart2;
-    public Image heart3;
+    private Image[] hearts;
+
+    void Awake()
+    {
+        hearts = GetComponentsInChildren<Image>();
+    }
 
     public void UpdateHearts(int lives)
     {
-        heart1.enabled = lives >= 1;
-        heart2.enabled = lives >= 2;
-        heart3.enabled = lives >= 3;
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            hearts[i].enabled = i < lives;
+        }
     }
 }
