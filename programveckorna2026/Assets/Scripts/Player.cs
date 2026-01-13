@@ -20,8 +20,8 @@ public class Player : MonoBehaviour
     public Sprite Player4;
 
     [Header("Laser")]
-    public Laser laserPrefab;           // Dra in din Laser-prefab här
-    public float fireRate = 1.5f;       // Sekunder mellan skott
+    public Laser laserPrefab;           
+    public float fireRate = 1.5f;       
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
 
         // Startposition inom kamerans vy
-        transform.position = new Vector3(0, -13.77f, 0);
+        transform.position = new Vector3(0, 0, 0);
     }
 
     private void Update()

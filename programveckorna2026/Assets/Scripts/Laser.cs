@@ -4,8 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Laser : MonoBehaviour
 {
-    public float speed = 10f; // Hastighet
-    public Vector3 direction = Vector3.up; // Riktning
+    public float speed = 10f;
+    public Vector3 direction = Vector3.up; 
 
     [SerializeField] private ParticleSystem damageParticles;
     public AudioClip impactSound;
