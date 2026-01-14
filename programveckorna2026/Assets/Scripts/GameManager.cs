@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // TEST ONLY
+    // temp
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
