@@ -5,7 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     public float speed = 10f;
-    public Vector3 direction = Vector3.up; 
+    public Vector3 direction = Vector3.up;
 
     [SerializeField] private ParticleSystem damageParticles;
     public AudioClip impactSound;
@@ -18,18 +18,26 @@ public class Laser : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Spawna partiklar
-        if (damageParticles != null)
+        // Kolla om vi träffar en Enemy
+        if (collision.CompareTag("Enemy"))
         {
-            Instantiate(damageParticles, transform.position, Quaternion.identity);
-        }
+            // Partiklar
+            if (damageParticles != null)
+            {
+                Instantiate(damageParticles, transform.position, Quaternion.identity);
+            }
 
-        // Spela ljud
-        if (impactSound != null)
-        {
-            AudioSource.PlayClipAtPoint(impactSound, transform.position, impactVolume);
-        }
+            // Ljud
+            if (impactSound != null)
+            {
+                AudioSource.PlayClipAtPoint(impactSound, transform.position, impactVolume);
+            }
 
-        Destroy(gameObject);
+            // Döda enemy
+            Destroy(collision.gameObject);
+
+            // Förstör lasern
+            Destroy(gameObject);
+        }
     }
 }
