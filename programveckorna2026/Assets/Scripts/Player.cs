@@ -7,11 +7,12 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Player : MonoBehaviour
 {
+    
     GameManager GM;
     public Laser laserPrefab;
     Laser laser;
     float speed = 20f;
-    public int maxHealth = 4;
+    public int maxHealth = 5;
     public int currentHealth;
     float wait = 0;
     SpriteRenderer PG;
@@ -61,41 +62,32 @@ public class Player : MonoBehaviour
         {
             position.x += speed * Time.deltaTime;
         }
-        if (currentHealth == 4)
+        
+        //bara för o testa health med "H"
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            print("test");
-
-
-            transform.position = position;
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                print("skjut");
-                laser = Instantiate(laserPrefab, transform.position + new Vector3(0,1,0), Quaternion.identity);
-                wait = Time.time;
-
-
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-               
-            }
-
-
-
-
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                currentHealth = maxHealth;
-                transform.position = new Vector3(0, -13.77f, 0);
-                audioSource.Pause();
-            }
-
-
-
+            TakeDamage();
         }
 
 
     }
+    public void TakeDamage()
+    {
+        currentHealth--;
+
+        
+        GameManager.Instance.LoseLife();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Debug.Log("PLAYER DEAD");
+        gameObject.SetActive(false);
+    }
+
 }
 
