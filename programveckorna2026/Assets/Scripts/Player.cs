@@ -1,29 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class Player : MonoBehaviour
 {
-    
-    GameManager GM;
     public Laser laserPrefab;
-    Laser laser;
-    float speed = 20f;
-    public int maxHealth = 5;
-    public int currentHealth;
-    float wait = 0;
-    SpriteRenderer PG;
-    
+    private Laser laser;
+    private float speed = 20f;
 
+    public int maxHealth = 4;
+    public int currentHealth;
+
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         currentHealth = maxHealth;
-        PG = GetComponent<SpriteRenderer>();
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void TakeDamage(int amount)
@@ -31,80 +23,32 @@ public class Player : MonoBehaviour
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
-         
-            Debug.Log("Du f�rlora. Tryck y f�r att spela igen eller n f�r att avsluta");
-
+            Debug.Log("Du förlorade! Tryck Y för att spela igen.");
         }
-
     }
 
-
-
-
-    // Update is called once per frame
     void Update()
     {
-        print("test2");
         Vector3 position = transform.position;
 
         if (Input.GetKey(KeyCode.LeftArrow))
-        {
             position.x -= speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
+        if (Input.GetKey(KeyCode.RightArrow))
             position.x += speed * Time.deltaTime;
-        }
-        
-        //bara f�r o testa health med "H"
-        if (Input.GetKeyDown(KeyCode.H))
+
+        transform.position = position;
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            print("test");
-
-
-            transform.position = position;
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                print("skjut");
-                laser = Instantiate(laserPrefab, transform.position + new Vector3(0,1,0), Quaternion.identity);
-                wait = Time.time;
-
-
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-               
-            }
-
-
-
-
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                currentHealth = maxHealth;
-                transform.position = new Vector3(0, -13.77f, 0);
-
-            }
+            laser = Instantiate(laserPrefab, transform.position + Vector3.up, Quaternion.identity);
         }
-    }
-    public void TakeDamage()
-    {
-        currentHealth--;
 
-        
-        GameManager.Instance.LoseLife();
-
-        if (currentHealth <= 0)
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            Die();
+            currentHealth = maxHealth;
+            transform.position = new Vector3(0, -13.77f, 0);
         }
     }
-    void Die()
-    {
-        Debug.Log("PLAYER DEAD");
-        gameObject.SetActive(false);
-    }
-
 }
+
 
