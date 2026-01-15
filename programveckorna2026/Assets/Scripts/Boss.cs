@@ -4,7 +4,7 @@ public class Boss : MonoBehaviour
 {
     [Header("Prefabs & FX")]
     [SerializeField] private Missile missilePrefab;        // Missilen bossen skjuter
-    [SerializeField] private ParticleSystem damageParticals; // Partiklar vid död
+    [SerializeField] private ParticleSystem damageParticals; // Partiklar vid dï¿½d
 
     [Header("Boss stats")]
     public int maxHealthBoss = 6;
@@ -12,7 +12,7 @@ public class Boss : MonoBehaviour
 
     [Header("Movement")]
     private float speed = 10f;
-    private int direction = -1; // 1 = höger, -1 = vänster
+    private int direction = -1; // 1 = hï¿½ger, -1 = vï¿½nster
 
     private void Start()
     {
@@ -26,19 +26,19 @@ public class Boss : MonoBehaviour
         MoveBoss();
     }
 
-    // Rörelse horisontellt
+    // Rï¿½relse horisontellt
     private void MoveBoss()
     {
         transform.position += (direction == 1 ? Vector3.right : Vector3.left) * speed * Time.deltaTime;
 
-        // Vänd vid skärmens kanter
+        // Vï¿½nd vid skï¿½rmens kanter
         if (transform.position.x <= -15 || transform.position.x >= 15)
         {
             direction *= -1;
         }
     }
 
-    // Kallas av player när bossen träffas
+    // Kallas av player nï¿½r bossen trï¿½ffas
     public void TakeDamageBoss(int amount)
     {
         currentHealthBoss -= amount;
@@ -49,20 +49,20 @@ public class Boss : MonoBehaviour
         }
     }
 
-    // Dödar bossen
+    // Dï¿½dar bossen
     private void Die()
     {
-        // Spawna partiklar ovanför bossen
+        // Spawna partiklar ovanfï¿½r bossen
         Instantiate(damageParticals, transform.position + Vector3.up * 2, Quaternion.identity);
 
-        Destroy(gameObject); // Förstör bossen
-        Debug.Log("Du vann! Bossen är dödad.");
+        Destroy(gameObject); // Fï¿½rstï¿½r bossen
+        Debug.Log("Du vann! Bossen ï¿½r dï¿½dad.");
     }
 
     // Skjuter missiler mot spelaren
     private void FireMissile()
     {
-        // Slumpa ett “gap” för missiler
+        // Slumpa ett ï¿½gapï¿½ fï¿½r missiler
         int missFire = Random.Range(0, 30);
 
         for (int i = 0; i < 30; i++)
@@ -72,7 +72,7 @@ public class Boss : MonoBehaviour
                 Vector3 spawnPos = new Vector3(-15 + i, transform.position.y, 0);
                 Missile missile = Instantiate(missilePrefab, spawnPos, Quaternion.identity);
 
-                // Sätt hastighet på missilen
+                // Sï¿½tt hastighet pï¿½ missilen
                 missile.speed = 10f;
             }
         }

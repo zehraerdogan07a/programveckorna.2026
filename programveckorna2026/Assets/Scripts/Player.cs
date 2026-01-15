@@ -7,11 +7,12 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Player : MonoBehaviour
 {
+    
     GameManager GM;
     public Laser laserPrefab;
     Laser laser;
     float speed = 20f;
-    public int maxHealth = 4;
+    public int maxHealth = 5;
     public int currentHealth;
     float wait = 0;
     SpriteRenderer PG;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
          
-            Debug.Log("Du förlora. Tryck y för att spela igen eller n för att avsluta");
+            Debug.Log("Du fï¿½rlora. Tryck y fï¿½r att spela igen eller n fï¿½r att avsluta");
 
         }
 
@@ -54,7 +55,9 @@ public class Player : MonoBehaviour
         {
             position.x += speed * Time.deltaTime;
         }
-        if (currentHealth == 4)
+        
+        //bara fï¿½r o testa health med "H"
+        if (Input.GetKeyDown(KeyCode.H))
         {
             print("test");
 
@@ -85,5 +88,23 @@ public class Player : MonoBehaviour
             }
         }
     }
+    public void TakeDamage()
+    {
+        currentHealth--;
+
+        
+        GameManager.Instance.LoseLife();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Debug.Log("PLAYER DEAD");
+        gameObject.SetActive(false);
+    }
+
 }
 
