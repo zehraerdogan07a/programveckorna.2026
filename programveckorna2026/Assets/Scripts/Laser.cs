@@ -27,11 +27,7 @@ public class Laser : MonoBehaviour
                 Instantiate(damageParticles, transform.position, Quaternion.identity);
             }
 
-            // Ljud
-            if (impactSound != null)
-            {
-                AudioSource.PlayClipAtPoint(impactSound, transform.position, impactVolume);
-            }
+          
 
             // Döda enemy
             Destroy(collision.gameObject);
