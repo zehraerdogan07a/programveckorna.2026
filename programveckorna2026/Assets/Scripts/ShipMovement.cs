@@ -8,7 +8,7 @@ public class ShipMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -31,8 +31,11 @@ public class ShipMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Border")
         {
-            transform.position = new Vector3 (transform.position.x, transform.position.y + direction, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y + direction, transform.position.z);
             moveSpeed *= -1;
         }
     }
+  
 }
+
+

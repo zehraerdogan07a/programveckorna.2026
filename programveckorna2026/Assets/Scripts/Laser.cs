@@ -35,6 +35,13 @@ public class Laser : MonoBehaviour
 
             // Döda enemy
             Destroy(collision.gameObject);
+            if (GameManager2.Instance != null)
+            {
+                GameManager2.Instance.ShipDestroyed();
+
+
+            }
+
 
             // Förstör lasern
             Destroy(gameObject);
