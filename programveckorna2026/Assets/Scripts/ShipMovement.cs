@@ -9,8 +9,8 @@ public class ShipMovement : MonoBehaviour
     {
         transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
 
-        if (transform.position.y < -2) direction = 1;
-        if (transform.position.y > 1) direction = -1;
+        if (transform.position.y < -1) direction = 1;
+        if (transform.position.y > 2) direction = -1;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

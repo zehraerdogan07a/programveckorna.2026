@@ -15,7 +15,8 @@ public class Missile : MonoBehaviour
     {
         transform.position += direction * speed * Time.deltaTime;
 
-        if (transform.position.y < -20) Destroy(gameObject);
+        if (transform.position.y < -20f)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,9 +25,9 @@ public class Missile : MonoBehaviour
         {
             Destroy(gameObject);
 
-            var healthComponent = collision.GetComponent<Player>();
-            if (healthComponent != null)
-                healthComponent.TakeDamage(1);
+            Player player = collision.GetComponent<Player>();
+            if (player != null)
+                player.TakeDamage(1);
         }
     }
 }
